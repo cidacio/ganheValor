@@ -1,0 +1,38 @@
+<td colspan="8">
+
+    <div class="col-xs-6">
+        Conta destinho :
+        <select class="form-control input-sm" ui-select2="{allowClear: true}"
+                ng-model="transacaoEmEdicao.conta.id"
+                data-placeholder="Conta Destino">
+            <option value=""></option>
+            <option ng-repeat="conta in contas" value="{{conta.id}}">{{conta.nome}}</option>
+        </select>
+        <p></p>
+        Complemento :
+        <textarea placeholder="Complemento" class="form-control input-sm" id="complemento"
+                  ng-model="transacaoEmEdicao.complemento">
+        </textarea>
+    </div>
+    <div class="col-xs-6">
+        <p></p>
+        <p></p>
+        <p></p>
+        <a ng-if="!transacaoEmEdicao.possuiParcelamento" href="" class="btn btn-default"
+           ng-click="transacaoEmEdicao.possuiParcelamento = true">Adicionar Parcelamento</a>
+
+        <div class="btn-group  btn-group-vertical" ng-show="transacaoEmEdicao.possuiParcelamento">
+            <p class="input-group">
+                <a ng-if="transacaoEmEdicao.possuiParcelamento" href="" class="btn btn-primary btn-group-sm"
+                   ng-click="transacaoEmEdicao.possuiParcelamento = false"><span class="glyphicon glyphicon-repeat"> Parcelado</span></a>
+                <input type="number" class="input-sm" id="qtParcelas" ng-model="transacaoEmEdicao.parcelamento.qtParcelasPendentes" placeholder="Parcelas restantes">
+            </p>
+
+            <a ng-if="!transacaoEmEdicao.parcelamento.confirmacaoAutomatica" href="" class="btn btn-default btn-xs"
+               ng-click="transacaoEmEdicao.parcelamento.confirmacaoAutomatica = true"><span class="glyphicon glyphicon-unchecked"> Confirmação automática das parcelas</span></a>
+            <a ng-if="transacaoEmEdicao.parcelamento.confirmacaoAutomatica" href="" class="btn btn-primary btn-xs"
+               ng-click="transacaoEmEdicao.parcelamento.confirmacaoAutomatica = false"><span class="glyphicon glyphicon-check"> Confirmação automática das parcelas</span></a>
+        </div>
+    </div>
+
+</td>

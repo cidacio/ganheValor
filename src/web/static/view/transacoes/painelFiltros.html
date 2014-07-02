@@ -1,0 +1,89 @@
+<div class="panel panel-primary"  ng-init="inicializaDados()">
+    <div class="panel-heading">
+        Filtro
+    </div>
+
+    <div class="panel-body painel">
+        <div class="btn-group  btn-group-vertical">
+            <p class="input-group">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="decrementaMesFiltro()"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                </span>
+
+                <input type="text" class="form-control input-sm" datepicker-options="dateFiltroOptions" datepicker-popup="MMMM/yyyy" ng-model="mes" is-open="opened" ng-required="true"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="incrementaMesFiltro()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                </span>
+            </p>
+
+            <label class="btn btn-primary" ng-model="radioVisualizaTransacao" btn-radio="'todas'">Todas transações</label>
+            <label class="btn btn-primary" ng-model="radioVisualizaTransacao" btn-radio="'pendentes'"><span class="glyphicon glyphicon-unchecked"> Pendentes</span></label>
+            <label class="btn btn-primary" ng-model="radioVisualizaTransacao" btn-radio="'confirmadas'"><span class="glyphicon glyphicon-check"> Confirmadas</span></label>
+            <!-- div ng-form class="btn-group" dropdown>
+                <input type="text" class="dropdown-toggle" ng-model="mes">
+                <div class="dropdown-menu" role="menu">
+                    <datepicker ng-model="startDate" datepicker-mode="'month'"></datepicker>
+                </div>
+            </div-->
+        </div>
+    </div>
+
+    <div class="panel-info" ng-init="carregarContas()">
+        <div class="panel-heading">
+            Contas
+        </div>
+        <table class="table-striped table-bordered table-condensed table-hover table-responsive">
+            <tr ng-repeat="conta in contas">
+                <td class="" width="10%"><input type="checkbox" ng-model="conta.selecionado"></td>
+                <td width="50%"><label ng-bind="conta.nome"></label></td>
+                <td width="40%">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-check"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-unchecked"></span>
+                </button>
+
+            </div>
+            <button type="button" ng-click="salvarConta()" class="btn btn-default btn-sm pull-right">Nova conta</button>
+        </div>
+    </div>
+    <p>
+    <div class="panel-info" ng-init="carregarCategorias()">
+        <div class="panel-heading">Categorias</div>
+        <div class="painel">
+            <input ng-model="filtroCategoria" type="text" placeholder="Localizar categoria">
+            <treeview search-model="filtroCategoria" data-check="true" expand-all="true"
+                      treeview-data="categorias" display-attr="descricao">
+            </treeview>
+            {{categorias}}
+        </div>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-check"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-unchecked"></span>
+                </button>
+
+            </div>
+
+            <button type="button" ng-click="incluirCategoria()" class="btn btn-default btn-sm pull-right">Nova conta</button>
+        </div>
+    </div>
+</div>
+

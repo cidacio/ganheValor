@@ -1,0 +1,42 @@
+<td>
+    <input type="text" class="form-control input-sm" datepicker-popup="dd/MM/yyyy"
+           ng-model="transacaoEmEdicao.data" is-open="transacaoEmEdicao.dataAberta"  ng-required="true"/>
+</td>
+<td><select class="form-control input-sm" ui-select2="{allowClear: true}"
+            ng-model="transacaoEmEdicao.conta.id"
+            data-placeholder="Conta">
+    <option value=""></option>
+    <option ng-repeat="conta in contas" value="{{conta.id}}">{{conta.nome}}</option>
+</select></td>
+
+<td>
+    <input type="text" ng-model="transacaoEmEdicao.favorecido" placeholder="Pessoa"
+           typeahead="pessoa as pessoa.nome for pessoa in pessoas | filter:$viewValue | limitTo:8"
+           typeahead-loading="carregandoPessoas" class="form-control">
+    <i ng-show="carregandoPessoas" class="glyphicon glyphicon-refresh"></i>
+</td>
+
+<td>
+    <select class="form-control input-sm" ui-select2="{allowClear: true}"
+            ng-model="transacaoEmEdicao.categoria.id" data-placeholder="Categoria">
+        <option value="1">Transferência</option>
+        <optgroup ng-repeat="categoria in categorias" label="{{categoria.descricao}}">
+            <option ng-repeat="categoria in categorias" value="{{categoria.id}}">{{categoria.descricao}}</option>
+    </select>
+</td>
+
+<td><input class="form-control input-sm" type="number" ng-model="transacaoEmEdicao.valor" /></td>
+<td>{{transacao.saldo}}</td>
+<td>
+    <a ng-if="!transacao.confirmado" href="" class="btn btn-primary btn-xs center-block"
+       ng-click="transacao.confirmado = true"><span class="glyphicon glyphicon-check"></span></a>
+    <a ng-if="transacao.confirmado" href="" class="btn btn-default btn-xs center-block"
+       ng-click="transacao.confirmado = false"><span class="glyphicon glyphicon-unchecked"></span></a>
+</td>
+<td>
+    <a href="" class="btn btn-primary btn-xs" ng-click="salvarTransacao()">
+        <span class="glyphicon glyphicon-floppy-save"></span></a>
+    <a href="" class="btn btn-primary btn-xs" ng-click="cancelarEdicaoTransacao()">
+        <span class="glyphicon glyphicon-ban-circle"></span></a>
+
+</td>

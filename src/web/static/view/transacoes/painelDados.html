@@ -1,0 +1,55 @@
+<div class="panel panel-primary">
+    <div class="panel panel-heading">
+        <button class="btn btn-default btn-sm" ng-click="adicionarTransacao()">Adicionar transação</button>
+        <input style="color: black" class="input-sm" type="text" placeholder="Procurar texto" ng-model="filtroTransacao"/>
+    </div>
+    <div class="panel-body painel">
+        <label>Saldo em 31/12/2013: R$ 350,00</label>
+
+
+
+        <table ng-table="tableParams" class="table-striped table-bordered table-condensed table-hover table-responsive">
+            <thead>
+            <tr>
+                <th width="10%">Data</th>
+                <th width="20%">Conta</th>
+                <th width="24%">Credor/Devedor</th>
+                <th width="15%">Categoria</th>
+                <th width="10%">Valor</th>
+                <th width="10%">Saldo</th>
+                <th width="5%">Confirmado</th>
+                <th width="6%"></th>
+            </tr>
+            </thead>
+
+            <tr ng-if="transacaoEmEdicao && ! transacaoEmEdicao.id" ng-include="'/static/view/transacoes/linhaEmEdicao.html'"></tr>
+            <tr ng-if="transacaoEmEdicao && ! transacaoEmEdicao.id" ng-include="'/static/view/transacoes/dadosComplementares.html'"></tr>
+
+            <tbody ng-repeat="transacao in transacoes| filter:filtroTransacao">
+
+
+
+            <tr ng-if="transacao.id != transacaoEmEdicao.id" ng-click="setTransacaoEdicao(transacao)">
+                <td>{{transacao.data}}</td>
+                <td>{{transacao.conta.nome}}</td>
+                <td>{{transacao.favorecido.nome}}</td>
+                <td>{{transacao.categoria.descricao}}</td>
+                <td>{{transacao.valor}}</td>
+                <td>{{transacao.saldo}}</td>
+                <td>
+                    <a ng-if="!transacao.confirmado" href="" class="btn btn-primary btn-xs center-block" ng-click="transacao.confirmado = true"><span class="glyphicon glyphicon-check"></span></a>
+                    <a ng-if="transacao.confirmado" href="" class="btn btn-default btn-xs center-block" ng-click="transacao.confirmado = false"><span class="glyphicon glyphicon-unchecked"></span></a>
+                </td>
+                <td>
+                    <a href="" class="btn btn-default btn-xs" ng-click="setTransacaoEdicao(transacao)"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+
+            <tr ng-if="transacao.id === transacaoEmEdicao.id" ng-include="'/static/view/transacoes/linhaEmEdicao.html'"></tr>
+            <tr ng-if="transacao.id === transacaoEmEdicao.id" ng-include="'/static/view/transacoes/dadosComplementares.html'"></tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
