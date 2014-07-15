@@ -1,4 +1,3 @@
-app.controller("homeController", function($scope) {
-    
-});
+app.controller("homeController", function($scope, ngTableParams, $http) {
 
+});

@@ -7,7 +7,5 @@ class Conta(ndb.Model):
 
     def to_dict(self):
         dct=super(Conta, self).to_dict()
-       # dct['data']=self.data.strftime('%d/%m/%Y')
-       # dct['data_informada']=self.data_informada.strftime('%d/%m/%Y')
         dct['id']=self.key.id()
         return dct

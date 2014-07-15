@@ -1,13 +1,15 @@
 <td colspan="8">
 
     <div class="col-xs-6">
-        Conta destinho :
-        <select class="form-control input-sm" ui-select2="{allowClear: true}"
-                ng-model="transacaoEmEdicao.conta.id"
-                data-placeholder="Conta Destino">
-            <option value=""></option>
-            <option ng-repeat="conta in contas" value="{{conta.id}}">{{conta.nome}}</option>
-        </select>
+        <div ng-show="transacaoEmEdicao.categoria.id==1">
+            Conta destinho :
+            <select class="form-control input-sm" ui-select2="{allowClear: true}"
+                    ng-model="transacaoEmEdicao.conta_destino.id"
+                    data-placeholder="Conta Destino">
+                <option value=""></option>
+                <option ng-repeat="conta in contas" value="{{conta.id}}">{{conta.nome}}</option>
+            </select>
+        </div>
         <p></p>
         Complemento :
         <textarea placeholder="Complemento" class="form-control input-sm" id="complemento"
@@ -15,23 +17,37 @@
         </textarea>
     </div>
     <div class="col-xs-6">
+        <div class="btn-group  btn-group-justified">
+            <label class="btn btn-primary" ng-model="transacaoEmEdicao.tipo_parcelamento"
+                   btn-radio="'S'">Sem parcelamento</label>
+            <label class="btn btn-primary" ng-model="transacaoEmEdicao.tipo_parcelamento"
+                   btn-radio="'L'">Parcelamento limitado</label>
+            <label class="btn btn-primary" ng-model="transacaoEmEdicao.tipo_parcelamento"
+                   btn-radio="'I'">Parcelamento ilimitado</label>
+        </div>
         <p></p>
-        <p></p>
-        <p></p>
-        <a ng-if="!transacaoEmEdicao.possuiParcelamento" href="" class="btn btn-default"
-           ng-click="transacaoEmEdicao.possuiParcelamento = true">Adicionar Parcelamento</a>
 
-        <div class="btn-group  btn-group-vertical" ng-show="transacaoEmEdicao.possuiParcelamento">
-            <p class="input-group">
-                <a ng-if="transacaoEmEdicao.possuiParcelamento" href="" class="btn btn-primary btn-group-sm"
-                   ng-click="transacaoEmEdicao.possuiParcelamento = false"><span class="glyphicon glyphicon-repeat"> Parcelado</span></a>
-                <input type="number" class="input-sm" id="qtParcelas" ng-model="transacaoEmEdicao.parcelamento.qtParcelasPendentes" placeholder="Parcelas restantes">
-            </p>
+        <div class="btn-group  btn-group-justified" ng-show="transacaoEmEdicao.tipo_parcelamento === 'L'">
+            <div class="input-group-addon">
+                <label for="nu_parcela">Parcela :</label>
+                <input type="number" class="input-sm" style="width: 40%" id="nu_parcela"
+                       ng-model="transacaoEmEdicao.nu_parcela" placeholder="Número">
+            </div>
+            <div class="input-group-addon">
+                <label for="qt_parcelas">Quantidade de parcelas :</label>
+                <input type="number" class="input-sm" style="width: 40%" id="qt_parcelas"
+                       ng-model="transacaoEmEdicao.parcelamento.qt_parcelas" placeholder="Quantidade">
+            </div>
 
-            <a ng-if="!transacaoEmEdicao.parcelamento.confirmacaoAutomatica" href="" class="btn btn-default btn-xs"
-               ng-click="transacaoEmEdicao.parcelamento.confirmacaoAutomatica = true"><span class="glyphicon glyphicon-unchecked"> Confirmação automática das parcelas</span></a>
-            <a ng-if="transacaoEmEdicao.parcelamento.confirmacaoAutomatica" href="" class="btn btn-primary btn-xs"
-               ng-click="transacaoEmEdicao.parcelamento.confirmacaoAutomatica = false"><span class="glyphicon glyphicon-check"> Confirmação automática das parcelas</span></a>
+        </div>
+        <p></p>
+        <div ng-show="transacaoEmEdicao.tipo_parcelamento !== 'S'">
+            <a ng-if="!transacaoEmEdicao.parcelamento.confirmacao_automatica" href="" class="btn btn-default btn-xs"
+               ng-click="transacaoEmEdicao.parcelamento.confirmacao_automatica = true"><span
+                    class="glyphicon glyphicon-unchecked"> Confirmação automática das parcelas</span></a>
+            <a ng-if="transacaoEmEdicao.parcelamento.confirmacao_automatica" href="" class="btn btn-primary btn-xs"
+               ng-click="transacaoEmEdicao.parcelamento.confirmacao_automatica = false"><span
+                    class="glyphicon glyphicon-check"> Confirmação automática das parcelas</span></a>
         </div>
     </div>
 
