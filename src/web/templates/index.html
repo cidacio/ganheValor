@@ -1,111 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="ganheValor">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ganhe Valor</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ganhe Valor</title>
 
-        <link href="../static/css/app.css" rel="stylesheet">
-        <link href="../static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <!--link href="../static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"-->
+    <link href="../static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="../static/lib/ui.treeview/treeview.css" rel="stylesheet">
+    <!--link href="../static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet"-->
 
-        <link href="../static/lib/ng-table/ng-table.min.css" rel="stylesheet">
-        <link href="../static/lib/select2-3.5.0/select2-bootstrap.css" rel="stylesheet">
-        <link href="../static/lib/select2-3.5.0/select2.css" rel="stylesheet">
-    </head>
+    <link href="../static/lib/ui.treeview/treeview.css" rel="stylesheet">
 
-    <body>
+    <link href="../static/lib/ng-table/ng-table.min.css" rel="stylesheet">
+    <link href="../static/lib/select2-3.5.0/select2-bootstrap.css" rel="stylesheet">
+    <link href="../static/lib/select2-3.5.0/select2.css" rel="stylesheet">
+    <link href="../static/lib/jstree/themes/default/style.min.css" rel="stylesheet">
+    <link href="../static/lib/jstree/app.css" rel="stylesheet">
+    <link href="../static/css/app.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid">
+
+    <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Ganhe Valor</a>
+            </div>
 
-            <nav class="navbar navbar-inverse" role="navigation">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Ganhe Valor</a>
-                    </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#/transacoes">Transações</a></li>
-                            <li><a href="#">Orçamento</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configurações <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {% if _usuario_logado %}
+                <ul class="nav navbar-nav">
+                    <li><a href="#/orcamento">Orçamento</a></li>
+                    <li><a href="#/transacoes">Transações</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
                         </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cidacio <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Sair</a></li>
-                                </ul>
-                            </li>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configurações <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
                         </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-            <div ng-view></div>
-        </div>
+                    </li>
+                </ul>
 
-        <!-- Angular
+                <ul class="nav navbar-nav navbar-right">
+                    <a href="{{ _logout_url }}" class="btn btn-danger">Sair</a>
+                </ul>
+                {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <a href="{{ _login_url }}" class="btn btn-success">Login com google</a>
+                    </ul>
+                {% endif %}
 
-        <script src="../static/lib/angular-bootstrap/ui-bootstrap.controller"></script>
-
-        <script src="../static/lib/angular-bootstrap/ui-bootstrap-custom-0.10.0.controller"></script>
-         <script src="../static/lib/angular-ui/angular-ui.controller"></script>
-         <script src="../static/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-         <script src="../static/lib/bootstrap/js/bootstrap.js"></script>
-
-        -->
-        <script src="../static/lib/jquery/jquery.js"></script>
-        <script src="../static/lib/angular/angular.js"></script>
-        <script src="../static/lib/angular/angular-route.js"></script>
-        <script src="../static/lib/angular/i18n/angular-locale_pt-br.js"></script>
-
-        <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
-
-        <script src="../static/lib/angular-bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
-
-        <!--  Verificar -->
-
-        <script src="../static/lib/ng-table/ng-table.min.js"></script>
-
-        <script src="../static/lib/ui.treeview/ui.treeview.min.js"></script>
-
-        <script src="../static/lib/select2-3.5.0/angular-select2.js"></script>
-
-        <script src="../static/lib/select2-3.5.0/select2.js"></script>
-    
-        <!-- Aplicação -->
-        <script src="../static/controller/ganheValorModulo.js"></script>
-        <script src="../static/controller/homeController.js"></script>
-        <script src="../static/controller/transacoesController.js"></script>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 
 
-    </body>
+    <div ng-view></div>
+</div>
+
+<!-- Angular
+
+<script src="../static/lib/angular-bootstrap/ui-bootstrap.controller"></script>
+
+<script src="../static/lib/angular-bootstrap/ui-bootstrap-custom-0.10.0.controller"></script>
+ <script src="../static/lib/angular-ui/angular-ui.controller"></script>
+ <script src="../static/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+ <script src="../static/lib/bootstrap/js/bootstrap.js"></script>
+
+-->
+<script src="../static/lib/jquery/jquery.js"></script>
+<script src="../static/lib/angular/angular.js"></script>
+<script src="../static/lib/angular/angular-route.js"></script>
+<script src="../static/lib/angular/i18n/angular-locale_pt-br.js"></script>
+
+<script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="../static/lib/angular-bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+
+<script src="../static/lib/googlechart/ng-google-chart.js"></script>
+
+<!--  Verificar -->
+
+<script src="../static/lib/ng-table/ng-table.min.js"></script>
+
+<script src="../static/lib/ui.treeview/ui.treeview.min.js"></script>
+
+<script src="../static/lib/select2-3.5.0/angular-select2.js"></script>
+
+<script src="../static/lib/select2-3.5.0/select2.js"></script>
+
+<!-- Aplicação -->
+<script src="../static/controller/ganheValorModulo.js"></script>
+<script src="../static/controller/homeController.js"></script>
+<script src="../static/controller/transacoesController.js"></script>
+<script src="../static/controller/orcamentoController.js"></script>
+
+</body>
 </html>

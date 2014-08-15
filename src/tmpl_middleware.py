@@ -17,8 +17,12 @@ def execute(next_process, handler, dependencies, **kwargs):
 class TemplateMiddleware(Middleware):
     def set_up(self):
         def write_tmpl(template_name, values=None):
-            values = values or {}
-            return self.handler.response.write(tmpl.render(template_name, values))
+            dct={'_usuario_logado': self.dependencies.get('_usuario_logado'),
+                 '_logout_url': self.dependencies.get('_logout_url'),
+                 '_login_url': self.dependencies.get('_login_url')}
+
+            dct.update(values or {})
+            return self.handler.response.write(tmpl.render(template_name, dct))
 
         self.dependencies["_write_tmpl"] = write_tmpl
         self.dependencies["_render"] = tmpl.render

@@ -1,27 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from web.model.Pessoa import Pessoa
+
 from google.appengine.ext import ndb
 
+from backend.pessoa.model import Pessoa
 
-def listar(_json):
+
+def listar():
     query = Pessoa.query().order(Pessoa.nome)
     lista = query.fetch()
-    lista_dct=[objeto.to_dict() for objeto in lista]
-    _json(lista_dct)
-
-def salvar(_json, nome):
-    objeto = Pessoa(nome=nome)
-    objeto.put()
-    _json(objeto.to_dict())
-
+    lista_dct = [objeto.to_dict() for objeto in lista]
+    return lista_dct
 
 def apagar(objeto_id):
     chave = ndb.Key(Pessoa, int(objeto_id))
     chave.delete()
 
-def crie_se_nao_existir(pessoa_id, pessoa_nome):
 
+def crie_se_nao_existir(pessoa_id, pessoa_nome):
     if pessoa_id:
         return ndb.Key(Pessoa, int(pessoa_id))
     else:

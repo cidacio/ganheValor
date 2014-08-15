@@ -15,4 +15,15 @@ and open the template in the editor.
 }
 
 
+body {
+    margin: 0;
+    font-family: 'Calibri','Ubuntu', Tahoma, sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    color: #333333;
+    background-color: #efefef;
+}
+
+
+
 

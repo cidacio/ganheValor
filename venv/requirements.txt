@@ -1,1 +1,6 @@
+python-dateutil==1.5
 tekton==2.4
+gaebusiness==2.10
+gaegraph==2.1
+gaecookie==0.5
+gaepermission==0.1
